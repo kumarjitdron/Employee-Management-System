@@ -5,19 +5,21 @@ mydb=a.connect(
 	user="root",
 	password="Password",#Enter your Mysql Password Here!!
 	database="employeeM")
-cur=mydb.cursor()
 def npersonal():
 	e=input("Enter Employee Name: ")
 	c=input("Enter city: ")
 	d=input("Enter date of birth: ")
 	p=input("Enter Phone No.: ")
 	data=(e,c,d,p)
+	cur=mydb.cursor()
 	sql="insert into personal values(%s,%s,%s,%s)"
 	cur.execute(sql,data)
+	mydb.commit()
 	print("Data Entered Sucessfully!!!")
 	main()
 def personal():
 	sql="select * from personal"
+	cur=mydb.cursor()
 	cur.execute(sql)
 	d=cur.fetchall()
 	for i in d:
@@ -30,12 +32,14 @@ def noffice():
 	d=input("Enter Joining Date: ")
 	p=int(input("Enter Employee Basic Pay: "))
 	data=(i,e,c,d,p)
+	cur=mydb.cursor()
 	sql="insert into office values(%s,%s,%s,%s,%s)"
 	cur.execute(sql,data)
 	mydb.commit()
 	print("Data Entered Sucessfully!!!")
 	main()
 def office():
+	cur=mydb.cursor()
 	sql="select * from office"
 	cur.execute(sql)
 	d=cur.fetchall()
@@ -49,6 +53,7 @@ def nsalary():
 	d=input("Enter month: ")
 	p=int(input("Enter Employee worked days: "))
 	q=int(input("Enter Employee Final pay: "))
+	cur=mydb.cursor()
 	data=(i,e,c,d,p,q)
 	sql="insert into salary values(%s,%s,%s,%s,%s,%s)"
 	cur.execute(sql,data)
@@ -56,6 +61,7 @@ def nsalary():
 	print("Data Entered Sucessfully!!!")
 	main()
 def salary():
+	cur=mydb.cursor()
 	sql="select * from salary"
 	cur.execute(sql)
 	d=cur.fetchall()
@@ -90,9 +96,3 @@ def main():
 			main()
 print(logo)
 main()
-
-
-
-
-
-
